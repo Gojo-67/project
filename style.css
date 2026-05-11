@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Stack Sans Text", sans-serif;
+    background-color:#F7F8F0 ;
+}
+
+main{
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #7AAACE;
+    color: #F7F8F0;
+    border-radius: 10px;
+    box-shadow:5px 5px 10px 12px rgba(0, 0, 0, 0.1);
+}
