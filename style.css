@@ -8,6 +8,7 @@
 body{
     font-family: "Stack Sans Text", sans-serif;
     background-color:#F7F8F0 ;
+    padding: 5%;
 }
 
 main{
@@ -20,3 +21,36 @@ main{
     border-radius: 10px;
     box-shadow:5px 5px 10px 12px rgba(0, 0, 0, 0.1);
 }
+h1{
+    font-size: 40px;
+    margin: 20px 0;
+
+}
+
+input{
+    width: 100%;
+    max-width: 500px;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+.anime-list{
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+}
+
+.card{
+    background-color: #1e293b;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+.card:hover{
+    transform: translateY(-5px);
+}
+
