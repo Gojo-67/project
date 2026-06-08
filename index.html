@@ -13,11 +13,21 @@
     <main>
         <h1>welcome to my site</h1>
 
-        <input type="text" id="SearchInput" placeholder="Search">
+        <input type="text" id="searchInput" placeholder="Search">
         <section class="anime-list" id="animeContainer">
 
         </section>
     </main>
+    <div class="modal hidden" id="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">x</span>
+            <img src="" alt="" id="modalImg">
+            <h2 id="modalTitle"></h2>
+            <p id="modalRating"></p>
+            <p id="modalGenres"></p>
+            <p id="modalSynopsis"></p>
+        </div>
+    </div>
     <footer></footer>
     <script src="script.js"></script>
 </body>
