@@ -54,7 +54,7 @@ function toggleFavorite(id) {
 
 favoritesBtn.addEventListener('click',()=>{
   const favoriteAnime=curentAnimeList.filter((anime)=>{
-    favorites.includes(anime.mal_id)
+    return favorites.includes(anime.mal_id)
   })
   displayAnime(favoriteAnime)
 })
