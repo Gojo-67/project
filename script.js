@@ -1,22 +1,30 @@
-const container =document.querySelector("#animeContainer")
+const container = document.querySelector("#animeContainer")
 const searchInput = document.querySelector("#searchInput")
-const modal=document.querySelector("#modal")
-const closeModal=document.querySelector("#closeModal")
-let timeout=null
-async function fetchAnime(){
-    const response = await fetch(`https://api.jikan.moe/v4/anime?limit=12`)
-    const data = await response.json()
-    displayAnime(data.data)
+const modal = document.querySelector("#modal")
+const closeModal = document.querySelector("#closeModal")
+let timeout = null
+
+let curentAnimeList = []
+const favoritesBtn = document.querySelector("#favoritesBtn")
+const sortSelect = document.querySelector("#sortSelect")
+let favorites = JSON.parse(localStorage.getItem("favorites")) || []
+
+async function fetchAnime() {
+  const response = await fetch(`https://api.jikan.moe/v4/anime?limit=12`)
+  const data = await response.json()
+  curentAnimeList = data.data
+  displayAnime(curentAnimeList)
 }
 
-function displayAnime(animeList){
-    container.innerHTML = ""
+function displayAnime(animeList) {
+  container.innerHTML = ""
 
-    animeList.forEach(anime => {
-        const card=document.createElement("div")
-        card.classList.add('card')
-        card.innerHTML=`
-          
+  animeList.forEach(anime => {
+    const isFavorite = favorites.includes(anime.mal_id)
+    const card = document.createElement("div")
+    card.classList.add('card')
+    card.innerHTML = `
+          <div class="favorite">${isFavorite ? "⭐" : "☆"}
                 <img src ="${anime.images.jpg.image_url}">
                 <div class="card-content">
                     <h2>${anime.title}</h2>
@@ -25,17 +33,48 @@ function displayAnime(animeList){
                 </div>
            
         `
-    card.addEventListener('click',()=>openModal(anime))    
+    card.addEventListener('click', () => openModal(anime))
+    const favoritesBtn = card.querySelector(".favorite")
+    favoritesBtn.addEventListener("click", (event) => {
+      event.stopPropagation()
+      toggleFavorite(anime.mal_id)
+    })
     container.appendChild(card)
-    });
+  });
 }
 
-searchInput.addEventListener("input",(event)=>{
-    clearTimeout(timeout)
-    timeout=setTimeout(()=>{
-fetchAnime(event.target.value.trim())
-    },500)
-    
+function toggleFavorite(id) {
+  if (favorites.includes(id)) {
+    favorites = favorites.filter((favID) => favID != id)
+  }
+  else favorites.push(id)
+  localStorage.setItem("favorites", JSON.stringify(favorites))
+  displayAnime(curentAnimeList)
+}
+
+favoritesBtn.addEventListener('click',()=>{
+  const favoriteAnime=curentAnimeList.filter((anime)=>{
+    favorites.includes(anime.mal_id)
+  })
+  displayAnime(favoriteAnime)
+})
+
+sortSelect.addEventListener('change',(event)=>{
+  const sorted = curentAnimeList.slice()
+  if(event.target.value=='rating-desc'){
+    sorted.sort((a,b)=>b.score-a.score)
+  }
+   if(event.target.value=='rating-asc'){
+    sorted.sort((a,b)=>a.score-b.score)
+  }
+  displayAnime(sorted)
+})
+searchInput.addEventListener("input", (event) => {
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    fetchAnime(event.target.value.trim())
+  }, 500)
+
 })
 
 /* =========================
