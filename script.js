@@ -10,12 +10,10 @@ const sortSelect = document.querySelector("#sortSelect")
 let favorites = JSON.parse(localStorage.getItem("favorites")) || []
 
 async function fetchAnime(search = "") {
-  let url =
-    `https://api.jikan.moe/v4/anime?limit=12`;
+  let url = "https://api.jikan.moe/v4/anime?limit=12";
 
   if (search) {
-    url 
-      `https://api.jikan.moe/v4/anime?q=${search}&limit=12`;
+    url = `https://api.jikan.moe/v4/anime?q=${search}&limit=12`;
   }
 
   const response = await fetch(url);
