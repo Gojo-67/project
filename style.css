@@ -1,62 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap');
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    font-family: "Stack Sans Text", sans-serif;
-    background-color:#F7F8F0 ;
-    padding: 5%;
+body {
+  font-family: "Stack Sans Text", sans-serif;
+  background-color: #F7F8F0;
+  padding: 5%;
 }
 
-main{
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    text-align: center;
-    background-color: #7AAACE;
-    color: #F7F8F0;
-    border-radius: 10px;
-    box-shadow:5px 5px 10px 12px rgba(0, 0, 0, 0.1);
+main {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #7AAACE;
+  color: #F7F8F0;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 12px rgba(0, 0, 0, 0.1);
 }
-h1{
-    font-size: 40px;
-    margin: 20px 0;
+
+h1 {
+  font-size: 40px;
+  margin: 20px 0;
 
 }
 
-input{
-    width: 100%;
-    max-width: 500px;
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 16px;
-}
-.anime-list{
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 20px;
+input {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
-.card{
-    background-color: #1e293b;
-    padding: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: 0.3s;
+.anime-list {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
-.card:hover{
-    transform: translateY(-5px);
+
+.card {
+  background-color: #1e293b;
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
 }
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 
   display: flex;
   align-items: center;
@@ -90,10 +95,12 @@ input{
   top: 10px;
   font-size: 26px;
   cursor: pointer;
-}.modal {
+}
+
+.modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 
   display: flex;
   align-items: center;
@@ -127,10 +134,12 @@ input{
   top: 10px;
   font-size: 26px;
   cursor: pointer;
-}.modal {
+}
+
+.modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 
   display: flex;
   align-items: center;
@@ -145,11 +154,20 @@ input{
 
 .modal-content {
   background: #1e293b;
+  color: #F7F8F0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   max-width: 600px;
   width: 100%;
   padding: 20px;
   border-radius: 12px;
   position: relative;
+}
+
+.modal-content {
+  line-height: 1.5;
+
 }
 
 .modal-content img {
@@ -164,4 +182,48 @@ input{
   top: 10px;
   font-size: 26px;
   cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.controls button,
+.controls select {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #355872;
+  color: #F7F8F0;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.controls button:hover,
+.controls select:hover {
+  background: #1e293b;
+}
+
+.favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.favorite:hover {
+  transform: scale(1.15);
 }

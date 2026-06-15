@@ -3,17 +3,27 @@ const searchInput = document.querySelector("#searchInput")
 const modal = document.querySelector("#modal")
 const closeModal = document.querySelector("#closeModal")
 let timeout = null
-
+let showFavorites = false
 let curentAnimeList = []
 const favoritesBtn = document.querySelector("#favoritesBtn")
 const sortSelect = document.querySelector("#sortSelect")
 let favorites = JSON.parse(localStorage.getItem("favorites")) || []
 
-async function fetchAnime() {
-  const response = await fetch(`https://api.jikan.moe/v4/anime?limit=12`)
-  const data = await response.json()
-  curentAnimeList = data.data
-  displayAnime(curentAnimeList)
+async function fetchAnime(search = "") {
+  let url =
+    `https://api.jikan.moe/v4/anime?limit=12`;
+
+  if (search) {
+    url 
+      `https://api.jikan.moe/v4/anime?q=${search}&limit=12`;
+  }
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  curentAnimeList = data.data;
+
+  displayAnime(curentAnimeList);
 }
 
 function displayAnime(animeList) {
@@ -24,15 +34,17 @@ function displayAnime(animeList) {
     const card = document.createElement("div")
     card.classList.add('card')
     card.innerHTML = `
-          <div class="favorite">${isFavorite ? "⭐" : "☆"}
-                <img src ="${anime.images.jpg.image_url}">
-                <div class="card-content">
-                    <h2>${anime.title}</h2>
-                    <p class="rating">${anime.score}</p>
-                    
-                </div>
-           
-        `
+      <div class="favorite">
+        ${isFavorite ? "⭐" : "☆"}
+      </div>
+
+      <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
+
+      <div class="card-content">
+        <h2>${anime.title}</h2>
+        <p class="rating">⭐ ${anime.score || "N/A"}</p>
+      </div>
+    `
     card.addEventListener('click', () => openModal(anime))
     const favoritesBtn = card.querySelector(".favorite")
     favoritesBtn.addEventListener("click", (event) => {
@@ -52,12 +64,23 @@ function toggleFavorite(id) {
   displayAnime(curentAnimeList)
 }
 
-favoritesBtn.addEventListener('click',()=>{
-  const favoriteAnime=curentAnimeList.filter((anime)=>{
-    return favorites.includes(anime.mal_id)
-  })
-  displayAnime(favoriteAnime)
-})
+favoritesBtn.addEventListener("click", () => {
+  showFavorites = !showFavorites;
+
+  if (showFavorites) {
+    const favoriteAnime = curentAnimeList.filter(anime =>
+      favorites.includes(anime.mal_id)
+    );
+
+    displayAnime(favoriteAnime);
+
+    favoritesBtn.textContent = "Show All";
+  } else {
+    displayAnime(curentAnimeList);
+
+    favoritesBtn.textContent = "Show Favorites";
+  }
+});
 
 sortSelect.addEventListener('change',(event)=>{
   const sorted = curentAnimeList.slice()
